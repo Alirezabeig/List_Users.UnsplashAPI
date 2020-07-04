@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React , { Component, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, ActivityIndicator ,  } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, ActivityIndicator , SafeAreaView  } from 'react-native';
 import {TextInput} from 'react-native-paper';
 import { Button, Card, Image, CardItem, } from 'native-base';
 import Unsplash from 'unsplash-js';
@@ -56,26 +56,22 @@ class UserList extends Component {
   render (){
 
    const {profiles} = this.props;
-   console.log("RENDER: Profiles: ", profiles);
+   console.log("####RENDER: Profiles: ", profiles);
+  //console.log("RENDER: Objects: ", Object.values(profiles));
    console.log("--------***--- ---------------- ----------------:")
-
-    return Object.values(profiles).length > 0 ? (
-      <View>
+    return Object.values(profiles.results).length > 0 ? (
+      <SafeAreaView>
       <FlatList
-          data={Object.values(profiles)}
+          data={Object.values(profiles.results)}
+          keyExtractor={(item, index) => item.id}
           renderItem={({ item }) => (
-      <Card>
-        <CardItem>
-
           <View>
-            <Text>{item.name}</Text>
+            <Text style={styles.text}>{item.name}</Text>
           </View>
-          </CardItem>
-      </Card>
-        )}
-      keyExtractor={(item, index) => item.id}
-    />
-    </View>
+          )}
+        />
+    </SafeAreaView>
+
   ) :(
     <View style={styles.blank}>
         <Text style={{ fontSize: 20 }}>No Search Results.</Text>
@@ -85,7 +81,8 @@ class UserList extends Component {
 
       </View>
   );
-  }
+
+}
 }
 // <View>
 //   <Image
@@ -112,6 +109,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontSize: 50,
+    fontSize: 20,
   },
 });
