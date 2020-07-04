@@ -3,6 +3,7 @@ import React , { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Search from './components/Search';
 import UserList from './components/UserList';
+import Detail from './components/Detail';
 import { createStackNavigator} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import {Provider, connect} from 'react-redux'
@@ -20,10 +21,12 @@ render (){
   return (
     <Provider store = {store}>
         <NavigationContainer >
-          <Stack.Navigator>
+          <Stack.Navigator
+          >
 
               <Stack.Screen name="Search" component={Search}/>
-              <Stack.Screen name="UserList" component={UserList}/>
+              <Stack.Screen name="User List" component={UserList}/>
+              <Stack.Screen name="Detail" component={Detail}/>
 
           </Stack.Navigator>
         </NavigationContainer>

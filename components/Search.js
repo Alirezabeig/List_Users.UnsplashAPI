@@ -1,13 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import React , { Component, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, ActivityIndicator ,  } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, ActivityIndicator  } from 'react-native';
 import {TextInput} from 'react-native-paper';
-import { Button, Card, Image } from 'native-base';
+import { Button, Card} from 'native-base';
 import Unsplash from 'unsplash-js';
 
 
 class Search extends Component {
 
+  static navigationOptions = {
+      title: 'Pronóstico Actual',
+      header: navigation => ({
+        titleStyle: {
+          color: '#FFFFFF'
+        },
+        tintColor: '#0087B7'
+      })
+    }
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +35,7 @@ handleSearchInput = query => {
     this.setState(() => ({
         query:""
       }));
-    this.props.navigation.navigate("UserList",{
+    this.props.navigation.navigate("User List",{
       query,
       }
     );
@@ -43,9 +52,13 @@ handleSearchInput = query => {
     const {query, username}= this.state;
       return (
         <View style={styles.containers}>
+        <Image
+        style={styles.tinyLogo}
+          source={require('../assets/uns.png')}
+        />
         <TextInput
         style={styles.searchBox}
-        label="Enter an artist name"
+        label="Enter a photographer name"
         value={query}
         onChangeText={this.handleSearchInput}
       />
@@ -65,14 +78,19 @@ export default Search;
 
 const styles = StyleSheet.create({
   containers: {
-    marginTop: 30,
+    backgroundColor: "#000",
+    height: 700,
+
+
   },
   searchBox: {
-    marginLeft: 25,
+    marginLeft: 30,
     marginRight: 50,
+    borderRadius: 15,
+
   },
   inputButton: {
-    marginTop: 10,
+    marginTop: 20,
     marginLeft: 25,
     width: 300,
     height: 44,
@@ -88,5 +106,11 @@ const styles = StyleSheet.create({
     marginLeft: 110,
     fontFamily: 'AppleSDGothicNeo-Light',
     fontSize: 18,
+  },
+  tinyLogo: {
+    width: 200,
+    height: 200,
+    marginLeft: 60,
+    resizeMode: 'contain'
   },
 });
