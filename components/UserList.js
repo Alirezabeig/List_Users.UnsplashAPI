@@ -59,7 +59,7 @@ class UserList extends Component {
    console.log("####RENDER: Profiles: ", profiles);
   //console.log("RENDER: Objects: ", Object.values(profiles));
    console.log("--------***--- ---------------- ----------------:")
-    return Object.values(profiles.results).length > 0 ? (
+    return Object.values(profiles).length > 0 ? (
       <SafeAreaView>
       <FlatList
           data={Object.values(profiles.results)}
