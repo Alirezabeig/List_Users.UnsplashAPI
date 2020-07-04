@@ -5,6 +5,10 @@ import Search from './components/Search';
 import UserList from './components/UserList';
 import { createStackNavigator} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import {Provider, connect} from 'react-redux'
+import reducer from './reducers/index';
+import ReduxThunk from 'redux-thunk';
+import {createStore, applyMiddleware} from 'redux';
 
 const Stack = createStackNavigator();
 
@@ -12,9 +16,9 @@ export default class App extends Component{
 
 
 render (){
-  //const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
+  const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
   return (
-
+    <Provider store = {store}>
         <NavigationContainer >
           <Stack.Navigator>
 
@@ -23,6 +27,7 @@ render (){
 
           </Stack.Navigator>
         </NavigationContainer>
+      </Provider>
 
 
 

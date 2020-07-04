@@ -6,6 +6,9 @@ import { Button, Card, Image, CardItem, } from 'native-base';
 import Unsplash from 'unsplash-js';
 import fetch from 'node-fetch';
 import Search from './Search';
+import {receiveProfiles} from '../actions/index';
+import {connect} from 'react-redux';
+
 
 const unsplash = new Unsplash({
   accessKey: "O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A",
@@ -14,9 +17,9 @@ const unsplash = new Unsplash({
 
 class UserList extends Component {
 
-  // static navigationOptions = ({ route, navigation }) => ({
-  //     query: route.params.query,
-  //   });
+  static navigationOptions = ({ route, navigation }) => ({
+      query: route.params.query,
+    })
     //console.log(" KKKKKKKKKKKKKK<-this is query: ",query)
     //<Text style ={styles.text}>{showSearchUsers}</Text>
     constructor(props) {
@@ -84,7 +87,11 @@ class UserList extends Component {
     );
   }
 }
-export default UserList;
+
+const mapStateToProps = profiles => ({
+  profiles
+});
+export default connect(mapStateToProps,null) (UserList);
 
 const styles = StyleSheet.create({
   container: {
