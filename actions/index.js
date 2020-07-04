@@ -4,8 +4,11 @@
 
 export const RECEIVE_PROFILE='RECEIVE_PROFILE';
 
-export const receiveProfiles = profile => ({
-
+export const receiveProfiles = profiles => {
+  console.log("action Profiles=> ",profiles);
+return {
   type: 'RECEIVE_PROFILE',
-  profile
-});
+  profiles
+}
+
+};

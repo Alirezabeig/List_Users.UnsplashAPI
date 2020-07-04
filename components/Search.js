@@ -15,13 +15,10 @@ class Search extends Component {
   }
 }
 
-
 handleSearchInput = query => {
-
   this.setState(() => ({
       query
     }));
-
 };
 
   findUser = (query) => {
@@ -47,6 +44,7 @@ handleSearchInput = query => {
       return (
         <View style={styles.containers}>
         <TextInput
+        style={styles.searchBox}
         label="Enter an artist name"
         value={query}
         onChangeText={this.handleSearchInput}
@@ -68,6 +66,10 @@ export default Search;
 const styles = StyleSheet.create({
   containers: {
     marginTop: 30,
+  },
+  searchBox: {
+    marginLeft: 25,
+    marginRight: 50,
   },
   inputButton: {
     marginTop: 10,

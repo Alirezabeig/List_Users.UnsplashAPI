@@ -21,12 +21,12 @@ class UserList extends Component {
       query: route.params.query,
     })
     //console.log(" KKKKKKKKKKKKKK<-this is query: ",query)
-    //<Text style ={styles.text}>{showSearchUsers}</Text>
+    //<Text style ={styles.text}>{profiles}</Text>
     constructor(props) {
       super(props);
       this.state = {
         loading: true,
-        showSearchUsers: [],
+
     }
   }
 
@@ -34,15 +34,16 @@ class UserList extends Component {
   componentDidMount() {
     const query  = this.props.route.params.query;
     const url = "https://api.unsplash.com/search/users?page=1&client_id=O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A&query=" + query ;
-    const showSearchUsers = this.state
+    //const profile = this.props
     return(
       fetch(url)
       .then(response => response.json())
+      .then (profiles => this.props.receiveProfiles(profiles))
       .then(responseJson => {
         this.setState({
-          showSearchUsers: this.state.showSearchUsers.push(responseJson.results)
+          profiles: responseJson.results
         })
-        //console.log("SSSSS->responseJSON*:", showSearchUsers)
+        //console.log("DidMount Profiles:", this.props.profiles)
         console.log(" URL :", url)
         console.log("---------------- ---------------- ----------------:")
       //  console.log("this is C query: ",query);
@@ -53,45 +54,55 @@ class UserList extends Component {
     _KeyExtractor = (dataSource, index) => dataSource.email;
 
   render (){
-   const {showSearchUsers} = this.state;
-    console.log("RENDER :", showSearchUsers)
 
-    //console.log(" K<-this is showSearchUsers: ", showSearchUsers)
-    //console.log(" KKKKKKKKKKKKKK<-this is query: ", query)
-    return (
+   const {profiles} = this.props;
+   console.log("RENDER: Profiles: ", profiles);
+   console.log("--------***--- ---------------- ----------------:")
+
+    return Object.values(profiles).length > 0 ? (
       <View>
-      <Text>{showSearchUsers}</Text>
+      <FlatList
+          data={Object.values(profiles)}
+          renderItem={({ item }) => (
+      <Card>
+        <CardItem>
+
+          <View>
+            <Text>{item.name}</Text>
+          </View>
+          </CardItem>
+      </Card>
+        )}
+      keyExtractor={(item, index) => item.id}
+    />
+    </View>
+  ) :(
+    <View style={styles.blank}>
+        <Text style={{ fontSize: 20 }}>No Search Results.</Text>
+        <Text style={{ fontSize: 20, margin: 50 }}>Add Decks Below!</Text>
+
+
+
       </View>
-    //   <FlatList
-    //       data={this.state.showSearchUsers}
-    //       keyExtractor={this._KeyExtractor}
-    //       renderItem={({ item }) => (
-    //
-    //   <Card>
-    //     <CardItem>
-    //       <View>
-    //         <Image
-    //         source ={{
-    //           uri : item.profile_image.medium
-    //         }}
-    //         />
-    //       </View>
-    //       <View>
-    //         <Text>Name: {item.name}</Text>
-    //       </View>
-    //       </CardItem>
-    //   </Card>
-    //     )
-    //   }
-    // />
-    );
+  );
   }
 }
+// <View>
+//   <Image
+//   source ={{
+//     uri : item.profile_image.medium
+//   }}
+//   />
+// </View>
 
 const mapStateToProps = profiles => ({
   profiles
 });
-export default connect(mapStateToProps,null) (UserList);
+const mapDispatchToProps = dispatch => ({
+  receiveProfiles: profiles => dispatch(receiveProfiles(profiles))
+});
+
+export default connect(mapStateToProps,mapDispatchToProps) (UserList);
 
 const styles = StyleSheet.create({
   container: {
