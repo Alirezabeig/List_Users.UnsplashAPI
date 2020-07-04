@@ -17,6 +17,4 @@ const profiles = (state = initialState, action) => {
   }
 };
 
-
-
-export default decks;
+export default profiles;

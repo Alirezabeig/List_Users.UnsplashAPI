@@ -5,67 +5,35 @@ import {TextInput} from 'react-native-paper';
 import { Button, Card, Image } from 'native-base';
 import Unsplash from 'unsplash-js';
 
-const unsplash = new Unsplash({
-  accessKey: "O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A",
-  secretKey: "G64PsdPQVQ5dHLKQPcXQFz3pFHlwrmXLUaBwWRfame8"
-});
 
 class Search extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
-      showSearchUsers: [],
+      query: "",
   }
 }
 
 
 handleSearchInput = query => {
-  console.log("this is A  input query: "+query)
+
   this.setState(() => ({
       query
-
     }));
 
 };
 
   findUser = (query) => {
-
-    const showSearchUsers = this.state;
-    console.log("$$$$ URL ---------------- ---------------- ---------------- ----------------:")
-    console.log("this is C query: ",query);
-    //console.log("this is FFF showSearchUsers: "+showSearchUsers)
-
-    //const url = "https://api.unsplash.com/search/users?page=1&query=ali&client_id=O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A";
-    const url = "https://api.unsplash.com/search/users?page=1&client_id=O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A&query="+query ;
+    console.log("query:", query)
     this.setState(() => ({
-      query: ""
-    }));
-    
-
-      return (
-        fetch(url)
-        .then(response => response.json())
-        .then(responseJson => {
-          this.setState({
-            isLoading: false,
-            showSearchUsers: this.state.showSearchUsers.push(responseJson.results)
-          })
-          console.log("responseJSON ***:", showSearchUsers)
-          console.log("$$$$ URL :", url)
-          console.log("$$$$ URL ---------------- ---------------- ---------------- ----------------:")
-          console.log("this is C query: ",query);
-          })
-        .catch(error => console.error(error))
-      )
-
-
+        query:""
+      }));
+    this.props.navigation.navigate("UserList",{
+      query,
+      }
+    );
 };
-
-    // componentDidMount() {
-    // 	this.findUser();
-    // }
 
   render ()  {
     if (this.state.isLoading){

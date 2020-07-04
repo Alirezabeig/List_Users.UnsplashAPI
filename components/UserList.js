@@ -5,8 +5,7 @@ import {TextInput} from 'react-native-paper';
 import { Button, Card, Image, CardItem, } from 'native-base';
 import Unsplash from 'unsplash-js';
 import fetch from 'node-fetch';
-global.fetch = fetch;
-
+import Search from './Search';
 
 const unsplash = new Unsplash({
   accessKey: "O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A",
@@ -15,55 +14,53 @@ const unsplash = new Unsplash({
 
 class UserList extends Component {
 
-  static navigationOptions = ({ route }) => ({
-      query: route.params.query,
-    });
-  //const Unsplash = require('unsplash-js').default;
-  state = {
-      showSearchUsers: [],
-      isLoading: false,
+  // static navigationOptions = ({ route, navigation }) => ({
+  //     query: route.params.query,
+  //   });
+    //console.log(" KKKKKKKKKKKKKK<-this is query: ",query)
+    //<Text style ={styles.text}>{showSearchUsers}</Text>
+    constructor(props) {
+      super(props);
+      this.state = {
+        loading: true,
+        showSearchUsers: [],
     }
+  }
 
 
-//s_
-  userListFetch = () => {
-    const query = this.props;
-    const showSearchUsers = this.state;
-    console.log("this is C query: "+query);
-    console.log("this is FFF showSearchUsers: "+showSearchUsers)
-
-    //const url = "https://api.unsplash.com/search/users?page=1&query=ali&client_id=O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A";
-    const url = "https://api.unsplash.com/search/users?page=1&query=ali&client_id=O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A";
-
-      return (
-        fetch(url)
-        .then(response => response.json())
-        .then(responseJson => {
-          this.setState({
-            isLoading: false,
-            //showSearchUsers: this.state.showSearchUsers.concat(responseJson.results)
-          })
-          console.log("responseJSON ***:",+responseJson.results)
+  componentDidMount() {
+    const query  = this.props.route.params.query;
+    const url = "https://api.unsplash.com/search/users?page=1&client_id=O63JiddBj-CpNQtHKZTTEp0t6jcCOm_wFqPpsgrE1-A&query=" + query ;
+    const showSearchUsers = this.state
+    return(
+      fetch(url)
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState({
+          showSearchUsers: this.state.showSearchUsers.push(responseJson.results)
         })
-        .catch(error => console.error(error))
-      )
-    };
+        //console.log("SSSSS->responseJSON*:", showSearchUsers)
+        console.log(" URL :", url)
+        console.log("---------------- ---------------- ----------------:")
+      //  console.log("this is C query: ",query);
+        })
+      .catch(error => console.error(error))
+    )
+  }
+    _KeyExtractor = (dataSource, index) => dataSource.email;
 
-componentDidMount() {
-  this.userListFetch()
-}
-
-  //_KeyExtractor = (datasource, index) => datasource.id;
-  ////showSearchUsers : this.state.showSearchUsers.concat(responseJson.results)
   render (){
-    const { showSearchUsers } = this.state;
-    console.log(" <-this is showSearchUsers: "+showSearchUsers.name)
+   const {showSearchUsers} = this.state;
+    console.log("RENDER :", showSearchUsers)
+
+    //console.log(" K<-this is showSearchUsers: ", showSearchUsers)
+    //console.log(" KKKKKKKKKKKKKK<-this is query: ", query)
     return (
       <View>
-      <Text>you</Text>
+      <Text>{showSearchUsers}</Text>
       </View>
     //   <FlatList
-    //       data={showSearchUsers}
+    //       data={this.state.showSearchUsers}
     //       keyExtractor={this._KeyExtractor}
     //       renderItem={({ item }) => (
     //
@@ -75,9 +72,7 @@ componentDidMount() {
     //           uri : item.profile_image.medium
     //         }}
     //         />
-    //
     //       </View>
-    //
     //       <View>
     //         <Text>Name: {item.name}</Text>
     //       </View>
@@ -85,11 +80,9 @@ componentDidMount() {
     //   </Card>
     //     )
     //   }
-    //
     // />
     );
   }
-
 }
 export default UserList;
 
@@ -99,5 +92,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    fontSize: 50,
   },
 });
