@@ -34,5 +34,6 @@ export const styles = StyleSheet.create({
   signUpText:{
     color: 'white',
     fontSize: 20,
+    marginLeft: 10,
   },
 });

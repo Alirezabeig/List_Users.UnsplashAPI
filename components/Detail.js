@@ -41,7 +41,7 @@ console.log("allPhotos. length", allPhotos.length);
               title={'Users'}
               style={styles.inputButton}
               onPress={() => this.back()}
-            ><Text style={styles.signUpText}>Users</Text></Button>
+            ><Text style={styles.signUpText}>Back To User List</Text></Button>
 
 
           <View style={styles.containers}>
