@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React , { Component, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, ActivityIndicator  } from 'react-native';
+import { StyleSheet, Text, View, Keyboard,SafeAreaView,TouchableOpacity,TouchableWithoutFeedback , FlatList, Image, ActivityIndicator  } from 'react-native';
 import {TextInput} from 'react-native-paper';
 import { Button, Card} from 'native-base';
 import Unsplash from 'unsplash-js';
@@ -24,6 +24,7 @@ class Search extends Component {
   }
 }
 
+
 handleSearchInput = query => {
   this.setState(() => ({
       query
@@ -42,6 +43,7 @@ handleSearchInput = query => {
 };
 
   render ()  {
+
     if (this.state.isLoading){
       return (
         <View>
@@ -49,9 +51,13 @@ handleSearchInput = query => {
         </View>
       )
     }
+
     const {query, username}= this.state;
       return (
-        <View style={styles.containers}>
+        <SafeAreaView style={styles.containers}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
+        <View >
         <Image
         style={styles.tinyLogo}
           source={require('../assets/uns.png')}
@@ -70,6 +76,9 @@ handleSearchInput = query => {
       ><Text style={styles.signUpText}>Search</Text></Button>
           <StatusBar style="auto" />
         </View>
+        </TouchableWithoutFeedback>
+        </SafeAreaView>
+
       );
   }
   }
@@ -85,14 +94,14 @@ const styles = StyleSheet.create({
   },
   searchBox: {
     marginLeft: 30,
-    marginRight: 50,
+    marginRight: 40,
     borderRadius: 15,
 
   },
   inputButton: {
     marginTop: 20,
-    marginLeft: 25,
-    width: 300,
+    marginLeft: 30,
+    width: 305,
     height: 44,
     padding: 10,
     borderWidth: 0.2,

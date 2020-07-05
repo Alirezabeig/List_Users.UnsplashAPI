@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Search from './components/Search';
 import UserList from './components/UserList';
 import Detail from './components/Detail';
+import FullScreen from './components/FullScreen';
 import { createStackNavigator} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import {Provider, connect} from 'react-redux'
@@ -22,11 +23,15 @@ render (){
     <Provider store = {store}>
         <NavigationContainer >
           <Stack.Navigator
+          screenOptions={{
+    headerShown: false
+  }}
           >
 
               <Stack.Screen name="Search" component={Search}/>
               <Stack.Screen name="User List" component={UserList}/>
               <Stack.Screen name="Detail" component={Detail}/>
+              <Stack.Screen name="FullScreen" component={FullScreen}/>
 
           </Stack.Navigator>
         </NavigationContainer>

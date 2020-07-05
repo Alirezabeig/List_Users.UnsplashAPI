@@ -51,6 +51,9 @@ class UserList extends Component {
   }
     _KeyExtractor = (dataSource, index) => dataSource.email;
 
+    back (){
+      this.props.navigation.navigate('Search')
+    }
   render (){
 
    const {profiles} = this.props;
@@ -59,6 +62,12 @@ class UserList extends Component {
 
     return Object.values(profiles).length > 0 ? (
       <SafeAreaView style={styles.container}>
+
+      <Button
+        title={'Search'}
+        style={styles.inputButton}
+        onPress={() => this.back()}
+      ><Text style={styles.signUpText}>Search</Text></Button>
       <FlatList
           data={Object.values(profiles.results)}
           keyExtractor={(item, index) => item.id}
@@ -70,7 +79,7 @@ class UserList extends Component {
               this.props.navigation.navigate("Detail", {
                 id : item.id,
                 name :item.name,
-                profileImage: item.profile_image.large,
+                profile_image: item.profile_image,
                 photos : item.photos
               })
             }>
@@ -148,6 +157,16 @@ const styles = StyleSheet.create({
     height: 110,
     width:300,
 
+  },
+  inputButton: {
+    backgroundColor:"#000",
+    margin: 15,
+
+  },
+
+  signUpText:{
+    color: 'white',
+    fontSize: 20,
   },
   texts: {
     fontSize: 20,
