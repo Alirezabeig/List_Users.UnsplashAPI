@@ -13,14 +13,17 @@ class Detail extends Component {
     this.props.navigation.navigate('User List')
   }
 
+  state = {
+    allPhotos: [],
+  }
+
   render ()  {
-    console.log("&&&&& $$$ props => ",this.props);
+
     const {name ,id, profile_image, photos} = this.props.route.params;
-    console.log("&&&&& $$$ name => ",name);
-    console.log("&&&&& $$$ id => ",id);
-    console.log("&&&&& $$$ photos => ",photos[0].urls.full);
-    console.log("&&&&& $$$ profile_image => ",profile_image);
-    const allPhotos = [
+    const photoExists = photos.length;
+    
+
+ const allPhotos = [
       {id: 1,
         photo: photos[0].urls.full,
       },{id: 2,
@@ -30,40 +33,43 @@ class Detail extends Component {
       },
       ]
 
-      return (
+console.log("allPhotos. length", allPhotos.length);
 
+
+      return  allPhotos.length > 0 && photoExists > 0 ? (
         <View>
-        <Button
-          title={'Users'}
-          style={styles.inputButton}
-          onPress={() => this.back()}
-        ><Text style={styles.signUpText}>Users</Text></Button>
-
-        <View style={styles.containers}>
+            <Button
+              title={'Users'}
+              style={styles.inputButton}
+              onPress={() => this.back()}
+            ><Text style={styles.signUpText}>Users</Text></Button>
 
 
-            <FlatList
-            data={allPhotos}
-            renderItem={({ item }) => (
+          <View style={styles.containers}>
+                  <FlatList
+                  data={allPhotos}
+                  renderItem={({ item }) => (
 
-              <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("FullScreen", {
-                  photo : item.photo
-                })
-              }>
-              <Image
-                style={styles.image}
-                source={{ uri: item.photo}}/>
-                  </TouchableOpacity>
-            )}
-            keyExtractor={item => item.id}
-          />
+                    <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate("FullScreen", {
+                        photo : item.photo
+                      })
+                    }>
+                    <Image
+                      style={styles.image}
+                      source={{ uri: item.photo}}/>
+                        </TouchableOpacity>
+                  )}
+                  keyExtractor={item => item.id}
+                />
 
+            </View>
         </View>
-        </View>
 
-      );
+      ) : (
+        <View><Text> no image </Text></View>
+      )
   }
   }
 export default Detail;
