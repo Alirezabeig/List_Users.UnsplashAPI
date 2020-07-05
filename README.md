@@ -24,14 +24,14 @@ This app uses Unsplash REST API to pull its users based on search keywords and t
 
 
 ## Features:
-  StackNavigation is used to enable navigation between the screens
-  Unsplash user-list API is used to list users based on search keywords
-  Unsplash API is used to pull users photos based on users' name search
-  StyleSheet Component is used to design the app
-  Empty input in search will result in a message to ask the user to enter another keyword
-  Not found input in search will result in a message to ask the user to enter another keyword
-  Lack of photos in any any user's profile will result in an Alert.
-  Components are reusable
+  1. StackNavigation is used to enable navigation between the screens
+  2. Unsplash user-list API is used to list users based on search keywords
+  3. Unsplash API is used to pull users photos based on users' name search
+  4. StyleSheet Component is used to design the app
+  5. Empty input in search will result in a message to ask the user to enter another keyword
+  6. Not found input in search will result in a message to ask the user to enter another keyword
+  7. Lack of photos in any any user's profile will result in an Alert.
+  8. Components are reusable
 
 
 ## Start:
