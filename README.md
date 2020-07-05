@@ -59,5 +59,7 @@ This app uses Unsplash REST API to pull its users based on search keywords and t
 
 
 ## Future Improvement
-  Add unit tests
-  Add swiping left or right to go through users' images
+  1. Add unit tests
+  2. Add swiping left or right to go through users' images
+  3. Refactoring
+  4. Followers button activation
