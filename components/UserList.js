@@ -1,3 +1,4 @@
+//UserList.js (Pulls the list of users based on the keywords)
 import { StatusBar } from 'expo-status-bar';
 import React , { Component, useState } from 'react';
 import { StyleSheet, Text, View, Alert,TouchableOpacity, FlatList, Image, ActivityIndicator , SafeAreaView  } from 'react-native';
@@ -8,6 +9,7 @@ import fetch from 'node-fetch';
 import Search from './Search';
 import {receiveProfiles} from '../actions/index';
 import {connect} from 'react-redux';
+import {styles} from '../styles/UserListStyles'
 
 
 const unsplash = new Unsplash({
@@ -41,10 +43,7 @@ class UserList extends Component {
         this.setState({
           profiles: responseJson.results
         })
-        //console.log("DidMount Profiles:", this.props.profiles)
-        console.log(" URL :", url)
-        console.log("---------------- ---------------- ----------------:")
-      //  console.log("this is C query: ",query);
+
         })
       .catch(error => console.error(error))
     )
@@ -57,11 +56,6 @@ class UserList extends Component {
   render (){
 
    const {profiles} = this.props;
-
-   console.log("Profiles:", Object.values(profiles)[0] )
-   console.log("SS---------------- ---------------- ----------------:")
-   //console.log("Photos:::::length: ", profiles.results[0].photos.length);
-
     return Object.values(profiles)[0] > 0 ? (
 
       <SafeAreaView style={styles.container}>
@@ -114,10 +108,6 @@ class UserList extends Component {
 
           </View>
             </TouchableOpacity>
-
-
-
-
         )}
         />
     </SafeAreaView>
@@ -146,76 +136,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps,mapDispatchToProps) (UserList);
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#000',
-    height: 700,
-  },
-
-  image: {
-    width: 102,
-    height: 102,
-    borderRadius: 200,
-    marginRight: 20,
-    marginLeft: -30,
-    borderColor: "white",
-    borderWidth: 1.5,
-  },
-  cardImages: {
-    borderRadius: 500,
-    height: 100,
-    width:300,
-    marginLeft: 10,
-
-  },
-  card: {
-    borderRadius: 500,
-    height: 110,
-    width:300,
-
-  },
-  inputButton: {
-    backgroundColor:"#000",
-    margin: 15,
-
-  },
-
-  signUpText:{
-    color: 'white',
-    fontSize: 20,
-  },
-  noResult:{
-    marginTop: 0,
-    color: 'white',
-    fontSize: 15,
-  },
-  texts: {
-    fontSize: 20,
-    marginTop: 0,
-    fontFamily: "Cochin",
-  },
-  text: {
-    fontSize: 20,
-    fontFamily: "Cochin"
-  },
-  numbPhoto: {
-    fontSize: 15,
-    marginTop:10,
-    fontFamily: "Cochin"
-  },
-  tinyLogo: {
-    width: 100,
-    height: 100,
-  },
-  follow: {
-
-
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight:-320,
-    marginTop: -100,
-
-  }
-
-});

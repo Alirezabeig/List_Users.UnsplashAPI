@@ -1,3 +1,4 @@
+//Detail.js (Shows all the photos of a selected user )
 import { StatusBar } from 'expo-status-bar';
 import React , { Component, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, ActivityIndicator ,  } from 'react-native';
@@ -5,6 +6,7 @@ import {TextInput} from 'react-native-paper';
 import { Button, Card } from 'native-base';
 import Unsplash from 'unsplash-js';
 import {connect} from 'react-redux';
+import { styles } from '../styles/DetailScreenStyles'
 
 
 class Detail extends Component {
@@ -18,11 +20,8 @@ class Detail extends Component {
   }
 
   render ()  {
-
     const {name ,id, profile_image, photos} = this.props.route.params;
     const photoExists = photos.length;
-    
-
  const allPhotos = [
       {id: 1,
         photo: photos[0].urls.full,
@@ -73,44 +72,3 @@ console.log("allPhotos. length", allPhotos.length);
   }
   }
 export default Detail;
-  // const mapStateToProps = (state, { route }) => ({
-  //   profile: state[route.params.id]
-  //
-  // });
-//export default connect(mapStateToProps) (Detail);
-
-const styles = StyleSheet.create({
-  containers: {
-    alignItems: 'center',
-    height: 700,
-    backgroundColor: "#000"
-  },
-  searchBox: {
-    marginLeft: 25,
-    marginRight: 50,
-  },
-
-
-  image: {
-    width: 300,
-    height: 300,
-    borderRadius: 40,
-    marginRight: 20,
-    borderColor: "white",
-    borderWidth: 1.5,
-    marginTop: 10,
-  },
-
-  inputButton: {
-    backgroundColor:"#000",
-    width:500,
-    marginLeft: -10,
-    padding: 30,
-
-  },
-
-  signUpText:{
-    color: 'white',
-    fontSize: 20,
-  },
-});

@@ -1,9 +1,11 @@
+//Search.js (The search Input)
 import { StatusBar } from 'expo-status-bar';
 import React , { Component, useState } from 'react';
 import { StyleSheet, Text, View, Keyboard,SafeAreaView,TouchableOpacity,TouchableWithoutFeedback , FlatList, Image, ActivityIndicator  } from 'react-native';
 import {TextInput} from 'react-native-paper';
 import { Button, Card} from 'native-base';
 import Unsplash from 'unsplash-js';
+import {styles} from '../styles/SearchStyles'
 
 
 class Search extends Component {
@@ -84,42 +86,3 @@ handleSearchInput = query => {
   }
 
 export default Search;
-
-const styles = StyleSheet.create({
-  containers: {
-    backgroundColor: "#000",
-    height: 700,
-
-
-  },
-  searchBox: {
-    marginLeft: 30,
-    marginRight: 40,
-    borderRadius: 15,
-
-  },
-  inputButton: {
-    marginTop: 20,
-    marginLeft: 30,
-    width: 305,
-    height: 44,
-    padding: 10,
-    borderWidth: 0.2,
-    borderColor: 'black',
-    marginBottom: 20,
-    borderRadius: 10,
-    backgroundColor: "#DD095F",
-  },
-  signUpText:{
-    color: 'white',
-    marginLeft: 110,
-    fontFamily: 'AppleSDGothicNeo-Light',
-    fontSize: 18,
-  },
-  tinyLogo: {
-    width: 200,
-    height: 200,
-    marginLeft: 60,
-    resizeMode: 'contain'
-  },
-});

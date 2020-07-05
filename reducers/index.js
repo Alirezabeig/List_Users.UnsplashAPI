@@ -6,7 +6,7 @@ const profiles = (state = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_PROFILE:
-          //console.log("\nAll Profile- Reducer =>",state)
+          
       return {
         ...state,
         ...action.profiles
