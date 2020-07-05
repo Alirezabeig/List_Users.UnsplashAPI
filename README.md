@@ -22,6 +22,9 @@ This app uses Unsplash REST API to pull its users based on search keywords and t
 ## Framework:
   Expo - React Native - Redux library
 
+## Product UI 
+<img width="755" alt="productUI" src="https://user-images.githubusercontent.com/43462308/86526093-a3049580-be4c-11ea-938f-e79e00731689.png">
+
 
 ## Features:
   1. StackNavigation is used to enable navigation between the screens
