@@ -1,7 +1,8 @@
 # List Users and Users' photos - Unsplash API.
-This app uses Unsplash. com API to pull its users based on search keywords and then presents their photos.
+This app uses Unsplash REST API to pull its users based on search keywords and then presents their photos.
 
-Structure:
+## Structure:
+```
   App.js
   components
       Search.js (The search Input)
@@ -16,11 +17,13 @@ Structure:
       Includes the index file for actions
   assets
       Includes the images used in the app
+```
 
-Framework:
+## Framework:
   Expo - React Native - Redux library
 
-Featurs:
+
+## Features:
   StackNavigation is used to enable navigation between the screens
   Unsplash user-list API is used to list users based on search keywords
   Unsplash API is used to pull users photos based on users' name search
@@ -28,15 +31,18 @@ Featurs:
   Empty input in search will result in a message to ask the user to enter another keyword
   Not found input in search will result in a message to ask the user to enter another keyword
   Lack of photos in any any user's profile will result in an Alert.
+  Components are reusable
 
-Start:
+
+## Start:
   In order to start the project:
     1. clone the project
     2. Insert your accessKey and secretKey in UserList.js
     3. Open terminal and go to the project directory
     4. Type: $ npm install  $ expo start
 
-When on app:
+
+## App UX:
   Search users name
   Will see a list of users with the number of their photos
   Tap on the user you like
@@ -45,11 +51,13 @@ When on app:
   * Unsplash API only gives access to 3 photos of any given user
   * The Full Screen photo can be closed by tapping on the screen.
 
-Missing Something? Something is not working?
-  Open a GitHub issue, or
-  Send a pull request :D
+
+## Missing Something? Something is not working?
+  Open a GitHub issue
+  Send a pull request
   Make sure npm run lint passed
 
-Future Improvement
+
+## Future Improvement
   Add unit tests
   Add swiping left or right to go through users' images
